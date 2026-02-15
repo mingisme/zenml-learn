@@ -1,0 +1,28 @@
+services:
+  mysql:
+    image: mysql:8.0
+    platform: linux/amd64
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-ppassword"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+  zenml:
+    image: zenmldocker/zenml-server
+    platform: linux/amd64
+    ports:
+      - "8080:8080"
+    environment:
+      - ZENML_STORE_URL=mysql://root:password@host.docker.internal/zenml
+    links:
+      - mysql
+    depends_on:
+      mysql:
+        condition: service_healthy
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    restart: on-failure
