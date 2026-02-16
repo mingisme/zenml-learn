@@ -1,0 +1,18 @@
+[project]
+name = "zenml-rag-85"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "Your Name",email = "you@example.com"}
+]
+requires-python = ">=3.11,<3.14"
+dependencies = [
+    "setuptools (>=82.0.0,<83.0.0)",
+    "zenml (>=0.93.2,<0.94.0)",
+    "openai (>=2.21.0,<3.0.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
